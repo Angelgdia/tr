@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>{{ user.username }} - Manage user's accounts</title>
+    </head>
+    <body>
+          {% if action == "modify" %}
+                <form method="POST" action="create_edit/">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{previous_data.id}}">
+                    <input type="text" name="name" value="{{previous_data.name}}">
+                    <input type="text" name="surname" value="{{previous_data.surname}}">
+                    <input type="text" name="id_number" value="{{previous_data.id_number}}">
+                    <input type="text" name="account_number" value="{{previous_data.account_number}}">
+                    <button type="submit">Modify</button>
+                </form>
+
+
+          {% else %}
+                <form method="POST" action="create_edit/">
+                    {% csrf_token %}
+                    <input type="text" name="name" placeholder="name">
+                    <input type="text" name="surname" placeholder="surname">
+                    <input type="text" name="id_number" placeholder="id_number">
+                    <input type="text" name="account_number" placeholder="account_number">
+                    <button type="submit">Create</button>
+               </form>
+          {% endif %}
+
+
+    </body>
+</html>

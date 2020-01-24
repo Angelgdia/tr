@@ -1,0 +1,20 @@
+Open command line
+Go to docker dir
+RUN:
+docker-compose up
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+
+####
+
+Then, go to 127.0.0.0/admin and set it up with your google credentials:
+- https://console.developers.google.com/
+    In sites:
+    add 127.0.0.1 with both values
+    (Note that the example.com coming by default must be deleted while on the admin)
+
+    In social applications add:
+    name:Google API
+    provider: Google
+    Add your keys

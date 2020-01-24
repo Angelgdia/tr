@@ -1,0 +1,16 @@
+{% load socialaccount %}
+<html>
+  <head>
+    <title>LOG IN</title>
+  </head>
+  <body>
+    <h1>Log in</h1>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }} !</p>
+    <p><a href="products/">Proceed to accounts</a></p>
+
+  {% else %}
+    <a href="{% provider_login_url 'google' %}">Log in with Google</a>
+  {% endif %}
+  </body>
+</html>

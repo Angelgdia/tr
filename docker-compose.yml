@@ -1,0 +1,24 @@
+db:
+  restart: always
+  image: sameersbn/postgresql:10-2
+  ports:
+    - "5432:5432"
+  environment:
+    - DEBUG=true
+    - DB_USER=admin
+    - DB_PASS=admin
+    - DB_NAME=rindustest
+  volumes:
+    - /srv/docker/postgresql:/var/lib/postgresql
+
+web:
+  build: .
+  command:  bash -c "sleep 5 && python -u manage.py runserver 0.0.0.0:8000"
+  volumes:
+    - .:/code
+  ports:
+    - "8000:8000"
+  links:
+    - db
+  environment:
+    - PYTHONUNBUFFERED=0

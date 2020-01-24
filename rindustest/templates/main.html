@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>{{ user.username }} - User's accounts</title>
+    </head>
+    <body>
+        <div>
+            {{error}}
+        </div>
+        {% if not users %}
+            <p>Empty by now</p>
+        {% else %}
+            <div>
+                <ul>
+                    {% for user in users%}
+                       {% csrf_token %}
+                       <div>
+                           <form method="POST" action="/products/manage/">
+                                 {% csrf_token %}
+                               <input type="hidden" name="action" value="modify">
+                               <input type="hidden" name="id" value="{{user.id}}">
+                               NAME: <input type="text" readonly name="name"  value="{{user.name}}">
+                               SURNAME: <input type="text" readonly name="surname" value="{{user.surname}}">
+                               ID Number: <input type="text" readonly name="id_number" value="{{user.id_number}}">
+                               BANK ACCOUNT: <input type="text" readonly name="account_number" value="{{user.account_number}}">
+                               <button type="submit">Modify</button>
+                           </form>
+                    </div>
+                     <form method="POST" action="delete/">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                        <input type="hidden" name="id" value="{{user.id}}">
+                    </form>
+                    <hr>
+                    {% endfor %}
+                        </ul>
+                </div>
+        {% endif %}
+                <form method="POST" action="manage/">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="create">
+                    <button type="submit">Create</button>
+                </form>
+    </body>
+</html>
